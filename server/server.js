@@ -13,7 +13,9 @@ app.use(cors({
 
 app.use(cookieParser());
 
+
 require('./config/mongoose.config');
+require('./routes/task.route')(app);
 require('./routes/employee.route')(app);
 
 app.listen(process.env.MY_PORT,()=> {
