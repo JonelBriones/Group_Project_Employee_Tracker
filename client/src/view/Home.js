@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
+import Navbar from '../components/Navbar';
+
 const Home = (props) => {
     const [employee,setEmployee] = useState({})
     const navigate = useNavigate();
@@ -28,7 +30,6 @@ const Home = (props) => {
         navigate(url);
     }
     var currentdate = new Date();
-    // var dateTime = `Clocked In at: ${currentdate.getDate()}/${currentdate.getMonth()}/${currentdate.getFullYear()} at ${currentdate.getHours()}:${currentdate.getMinutes()}:${currentdate.getSeconds()}`
 
     Date.prototype.today = function () { 
         return ((this.getDate() < 10)?"0":"") + this.getDate() +"/"+(((this.getMonth()+1) < 10)?"0":"") + (this.getMonth()+1) +"/"+ this.getFullYear();
@@ -67,13 +68,14 @@ const Home = (props) => {
         }
     return (
         <div>
+            <Navbar/>
             {
                 employee._id===undefined?
-            <button onClick={()=>redirect('/login&registration')}>Login Button</button>:
+            <button onClick={()=>redirect('/login&registration')} className="btn btn-primary">Login Button</button>:
             <div>
-                <h1>Hello {employee.firstName + " " + employee.lastName}</h1>
+                {/* <h1>Logged in as {employee.firstName + " " + employee.lastName}</h1> */}
                 {
-                    employee.clockedIn===""?
+                    employee.clockedIn==="" || employee.clockedIn===undefined?
                     <form onSubmit={clockIn}>
                         {/* <input type="hidden" name="clockedIn" value={employee.clockedIn}></input> */}
                     <button type="submit">Clock In</button>
@@ -82,16 +84,21 @@ const Home = (props) => {
                 </form>
                 }
                 <p>{employee.clockedIn}</p>
+                <h1>Online</h1>
                 {
-            allEmployees.map((oneEmployee)=>(
-                <div key={oneEmployee._id}>
-                    {
-                        oneEmployee.clockedIn!="" && oneEmployee._id !== employee._id?
-                        oneEmployee.firstName:null
-                    }
-                </div>
-            ))
-        }
+                    allEmployees.map((oneEmployee)=>(
+                        <div key={oneEmployee._id}>
+                            {
+                                oneEmployee.clockedIn!="" && oneEmployee._id !== employee._id?
+                                <Link to={"/view/employee/" + oneEmployee._id}>
+                                {oneEmployee.firstName + " " + oneEmployee.lastName}
+                                </Link>
+                                :null
+                            }
+                        </div>
+                    ))
+                }
+                <h1>Uncompleted Tasks</h1>
             </div>
             }
         </div>
