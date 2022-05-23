@@ -9,4 +9,5 @@ module.exports = (app) => {
     app.get('/api/employees/employee',authenticate,EmployeeController.getLoggedInEmployee) 
     app.get('/api/employees/',EmployeeController.getAllEmployees) 
     app.put('/api/employee/edit/:id',EmployeeController.updateEmployee) 
+    app.delete('/api/employee/delete/:id',EmployeeController.deleteEmployee) 
 }

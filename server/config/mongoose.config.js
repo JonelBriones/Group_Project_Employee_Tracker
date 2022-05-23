@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
-//This will create a database named "person" if one doesn't already exist (no need for mongo shell!):
-mongoose.connect(`mongodb://localhost/${process.env.employee_tracker}`, { 
+mongoose.connect(`mongodb://localhost/
+${process.env.employee_tracker}`, { 
     useNewUrlParser: true, 
     useUnifiedTopology: true,
 })

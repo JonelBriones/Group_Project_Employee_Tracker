@@ -52,7 +52,7 @@ const LogReg = () => {
 
     const onSubmitHandlerLogin = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:8000/api/employee/login',employeeLogin)
+        axios.post('http://localhost:8000/api/employee/login',employeeLogin,{withCredentials:true})
             .then((res)=>{
                 console.log(res.data)
                 navigate('/home');
