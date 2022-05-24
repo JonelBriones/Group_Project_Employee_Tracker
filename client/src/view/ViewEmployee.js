@@ -1,11 +1,12 @@
 import React, {useState,useEffect} from 'react';
 import axios from 'axios';
-import { useNavigate,useParams } from 'react-router-dom';
+import { useNavigate,useParams,Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 const ViewEmployee = () => {
     const [employee,setEmployee] = useState({})
     const {id} = useParams();
     const [task,setTask] = useState([])
+    const navigate = useNavigate();
     useEffect(()=>{
         console.log(id)
         axios.get("http://localhost:8000/api/employee/" + id)
@@ -23,6 +24,9 @@ const ViewEmployee = () => {
             })
             .catch((err)=>console.log(err))
     },[])
+    const redirect = (url) => {
+        navigate(url)
+    }
     return (
         <>
             <Navbar/>
@@ -33,23 +37,22 @@ const ViewEmployee = () => {
                     <th scope="col">#</th>
                     <th scope="col">Name</th>
                     <th scope="col">Completed?</th>
-                    <th scope="col">Date</th>
+                    <th scope="col">Due Date</th>
                     </tr>
                 </thead>
                 <tbody>
                     {
                         task.map((oneTask,index)=>(
                             <tr key={oneTask._id} >
-                                <th scope="row">{index}</th>
+                                <th scope="row">{index+1}</th>
                                 {
                                     oneTask.createdBy._id === id?
                                     <>
-                                    <td>{oneTask.name}</td>
-                                    <td>
-                                        {/* {
-                                            employee.
-                                        } */}
-                                    </td>
+                                    <td onClick={()=>redirect(`/view/task/${oneTask._id}`)} className="table-link">{oneTask.name}</td>
+                                        {
+                                            employee.completed?
+                                            <td>true</td>:<td>false</td>
+                                        }
                                     <td>{oneTask.dueDate}</td>
                                     </>:null
                                 }
