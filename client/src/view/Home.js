@@ -7,6 +7,7 @@ const Home = (props) => {
     const [employee,setEmployee] = useState({})
     const navigate = useNavigate();
     const [allEmployees,setAllEmployees] = useState([])
+    const [uncompletedTasks, setUncompletedTasks] = useState([])
     useEffect(()=> {
         axios.get("http://localhost:8000/api/employees")
             .then((res)=>{
@@ -24,6 +25,16 @@ const Home = (props) => {
             .catch((err)=>{
                 console.log(err)
                 navigate('/login&registration')
+            })
+    },[])
+    useEffect(()=>{
+        axios.get("http://localhost:8000/api/task")
+            .then((res)=>{
+                console.log(res.data)
+                setUncompletedTasks(res.data)
+            })
+            .catch((err)=>{
+                console.log(err)
             })
     },[])
     const redirect = (url) => {
@@ -66,6 +77,9 @@ const Home = (props) => {
                 console.log(err.response.data.errors)
             })
         }
+    const formatDate = (date) =>{
+        return date.slice(0,10)
+    }
     return (
         <div>
             <Navbar/>
@@ -89,7 +103,7 @@ const Home = (props) => {
                     allEmployees.map((oneEmployee)=>(
                         <div key={oneEmployee._id}>
                             {
-                                oneEmployee.clockedIn!="" && oneEmployee._id !== employee._id?
+                                oneEmployee.clockedIn!=="" && oneEmployee._id !== employee._id?
                                 <Link to={"/view/employee/" + oneEmployee._id}>
                                 {oneEmployee.firstName + " " + oneEmployee.lastName}
                                 </Link>
@@ -99,6 +113,32 @@ const Home = (props) => {
                     ))
                 }
                 <h1>Uncompleted Tasks</h1>
+                <table className="table">
+                    <thead>
+                        <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Completed?</th>
+                        <th scope="col">Date</th>
+                        </tr>
+                    </thead>
+                {
+                    uncompletedTasks.map((oneTask, index) =>(
+                        <tbody>
+                        {
+                            oneTask.completed ? "" :
+                            <tr key={index}>
+                                <td>{index}</td>
+                                <td>{oneTask.name}</td>
+                                <td>False</td>
+                                <td>{formatDate(oneTask.dueDate)}</td>
+                            </tr>
+                        }
+                        </tbody>
+
+                    ))
+                }
+                </table>
             </div>
             }
         </div>

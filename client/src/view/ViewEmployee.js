@@ -48,11 +48,18 @@ const ViewEmployee = () => {
                                 {
                                     oneTask.createdBy._id === id?
                                     <>
+<<<<<<< HEAD
                                     <td onClick={()=>redirect(`/view/task/${oneTask._id}`)} className="table-link">{oneTask.name}</td>
                                         {
                                             employee.completed?
                                             <td>true</td>:<td>false</td>
                                         }
+=======
+                                    <td>{oneTask.name}</td>
+                                    <td>
+                                        {oneTask.completed ? "Completed" : "Incompleted"}
+                                    </td>
+>>>>>>> main
                                     <td>{oneTask.dueDate}</td>
                                     </>:null
                                 }
