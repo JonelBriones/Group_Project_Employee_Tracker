@@ -23,6 +23,13 @@ const TaskSchema = new mongoose.Schema({
             "Needs a due date!"
         ]
     },
+    completed:{
+        type: Boolean,
+        default:false
+    },
+    completedBy:{
+        type:String
+    },
     createdBy: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Employee"
