@@ -1,7 +1,13 @@
 .App {
   text-align: center;
 }
-td.table-link:hover {
+.table-link {
+  text-decoration: underline;
   color: blue;
+
+}
+td.table-link:hover {
   cursor: pointer;
 }
+
+

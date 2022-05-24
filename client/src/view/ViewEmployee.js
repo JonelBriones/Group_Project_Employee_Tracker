@@ -27,6 +27,9 @@ const ViewEmployee = () => {
     const redirect = (url) => {
         navigate(url)
     }
+    const formatDate = (date) =>{
+        return date.slice(0,10)
+    }
     return (
         <>
             <Navbar/>
@@ -44,23 +47,15 @@ const ViewEmployee = () => {
                     {
                         task.map((oneTask,index)=>(
                             <tr key={oneTask._id} >
-                                <th scope="row">{index+1}</th>
                                 {
                                     oneTask.createdBy._id === id?
                                     <>
-<<<<<<< HEAD
+                                    <th scope="row">{index+1}</th>
                                     <td onClick={()=>redirect(`/view/task/${oneTask._id}`)} className="table-link">{oneTask.name}</td>
-                                        {
-                                            employee.completed?
-                                            <td>true</td>:<td>false</td>
-                                        }
-=======
-                                    <td>{oneTask.name}</td>
                                     <td>
                                         {oneTask.completed ? "Completed" : "Incompleted"}
                                     </td>
->>>>>>> main
-                                    <td>{oneTask.dueDate}</td>
+                                    <td>{formatDate(oneTask.dueDate)}</td>
                                     </>:null
                                 }
                             </tr>
