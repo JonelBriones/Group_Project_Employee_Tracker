@@ -46,9 +46,7 @@ const ViewEmployee = () => {
                                     <>
                                     <td>{oneTask.name}</td>
                                     <td>
-                                        {/* {
-                                            employee.
-                                        } */}
+                                        {oneTask.completed ? "Completed" : "Incompleted"}
                                     </td>
                                     <td>{oneTask.dueDate}</td>
                                     </>:null
