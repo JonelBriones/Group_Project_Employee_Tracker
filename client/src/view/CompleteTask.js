@@ -55,6 +55,7 @@ const CompleteTask = (props) => {
                         <th scope="col">Task Name</th>
                         <th scope="col">Completed?</th>
                         <th scope="col">Date</th>
+                        <th scope="col">Created By</th>
                         </tr>
                     </thead>
                 {
@@ -67,6 +68,7 @@ const CompleteTask = (props) => {
                                 <td>{oneTask.name}</td>
                                 <td>Completed</td>
                                 <td>{formatDate(oneTask.dueDate)}</td>
+                                <td onClick={()=>redirect(`/view/task/${oneTask._id}`)} className="table-link">{oneTask.createdBy.username}</td>
                             </tr> 
                             : ""
                         }

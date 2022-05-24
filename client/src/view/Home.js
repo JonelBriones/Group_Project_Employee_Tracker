@@ -120,6 +120,7 @@ const Home = (props) => {
                         <th scope="col">Name</th>
                         <th scope="col">Completed?</th>
                         <th scope="col">Date</th>
+                        <th scope="col">Created By</th>
                         </tr>
                     </thead>
                 {
@@ -129,9 +130,10 @@ const Home = (props) => {
                             oneTask.completed ? "" :
                             <tr key={index}>
                                 <td>{index}</td>
-                                <td>{oneTask.name}</td>
+                                <td onClick={()=>redirect(`/view/task/${oneTask._id}`)} className="table-link">{oneTask.name}</td>
                                 <td>False</td>
                                 <td>{formatDate(oneTask.dueDate)}</td>
+                                <td onClick={()=>redirect(`/view/employee/${oneTask.createdBy._id}`)} className="table-link">{oneTask.createdBy.username}</td>
                             </tr>
                         }
                         </tbody>

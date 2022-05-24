@@ -75,6 +75,7 @@ const LogReg = () => {
     }
     return (
         <div>
+            <h1>Employee Tracker</h1>
             <Registration
             onSubmitHandler={onSubmitHandler}
             onChangeHandler={onChangeHandler}
