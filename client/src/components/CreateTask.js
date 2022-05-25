@@ -50,7 +50,11 @@ const CreateTask = () => {
             else{
                 navigate(`/home`)
             }
-        })}
+        })
+        .catch((err)=>{
+            console.log(err)
+        }) 
+    }
     function getDate(){
         let today = new Date();
         let dd = today.getDate();
@@ -66,14 +70,17 @@ return(
         <h1> Add Task</h1>
         <form onSubmit={onSubmitHandler}>
             <div>
+                {errors.name ? <p>{errors.name.message}</p> : null}
                 <label>Task:</label>
                 <input type='text' onChange={(e)=> setName(e.target.value)} value={name}/>
             </div>
             <div>
+            {errors.description ? <p>{errors.description.message}</p> : null}
                 <label>Description:</label>
                 <input input type='text' onChange={(e)=> setDescription(e.target.value)} value={description}/>
             </div>
             <div>
+                {errors.dueDate ? <p>{errors.dueDate.message}</p> : null}
                 <label>Due Date:</label>
                 <input type='date' onChange={(e)=> setDueDate(e.target.value)} value={dueDate}></input>
             </div>
