@@ -20,7 +20,7 @@ const TaskSchema = new mongoose.Schema({
         type: Date,
         required: [
             true,
-            "Needs a due date!"
+            "Add a due date to your new task!"
         ]
     },
     completed:{
