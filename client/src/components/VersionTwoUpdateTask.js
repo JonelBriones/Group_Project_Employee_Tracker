@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 
-const VersionTwoUpdateTask= () => {
+const UpdateTaskV2= () => {
     const [task, setTask] = useState({});
     const{id} = useParams ();
     const navigate = useNavigate();
@@ -100,10 +100,10 @@ const VersionTwoUpdateTask= () => {
                         value={task.dueDate}>
                     </input>
                 </div>
-                <input type='submit' />
+                <input type='submit'/>
             </form>
         </div>
     )
 }
 
-export default VersionTwoUpdateTask;
+export default UpdateTaskV2;
