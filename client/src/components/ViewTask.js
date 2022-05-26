@@ -12,11 +12,11 @@ const ViewTask = (props) => {
         console.log(id)
         axios.get("http://localhost:8000/api/task/" + id)
             .then((res)=>{
-                console.log(res.data)
+                console.log("task data",res.data)
                 setTask(res.data)
                 axios.get("http://localhost:8000/api/employee/" + res.data.createdBy)
                     .then((res)=>{
-                        console.log(res.data)
+                        console.log("created by",res.data)
                         setEmployee(res.data)
                     })
                     .catch((err)=>{
@@ -24,6 +24,18 @@ const ViewTask = (props) => {
                     })
             })
             .catch((err)=>console.log(err))
+    },[])
+    const [logged,setLogged] = useState({})
+    useEffect(() => {
+        axios.get("http://localhost:8000/api/employees/employee",{withCredentials:true})
+            .then((res)=>{
+                console.log(res.data)
+                setLogged(res.data)
+            })
+            .catch((err)=>{
+                console.log(err)
+                navigate('/login&registration')
+            })
     },[])
     const formatDate = (date) =>{
         return date.slice(0,10)
@@ -37,7 +49,23 @@ const ViewTask = (props) => {
         }
         )
         .then((res)=>{
-            console.log(res)
+            // console.log(res)
+            navigate('/completed_task')
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
+    }
+    const uncompleteHandler = (e) =>{
+        e.preventDefault();
+        axios.put('http://localhost:8000/api/task/'+ id,{
+            completed: false
+        },{
+            withCredentials: true
+        }
+        )
+        .then((res)=>{
+            // console.log(res)
             navigate('/completed_task')
         })
         .catch((err)=>{
@@ -54,11 +82,20 @@ const ViewTask = (props) => {
             <Navbar/>
             <h1>{task.name}</h1>
             <h2>{task.description}</h2>
+            <h2>{task.completed?"true":"false"}</h2>
             <p>Due Date: {task.dueDate ? formatDate(task.dueDate) : null}</p>
             <h3>Created By: {employee.firstName} {employee.lastName}</h3>
             <h4>Clocked in? {employee.clockedIn == '' ? 'False' : 'Currently Working'}</h4>
             <p>
-                {employee.completed ? '' :<p><button onClick={completeHandler}>Complete</button> <button onClick={navigateHome}>Cancel</button></p>}
+                {
+                employee._id === logged._id?
+                <>
+                {task.completed ? 
+                <>
+                <button onClick={uncompleteHandler}>Uncomplete</button>
+                <button onClick={navigateHome}>Cancel</button>
+                </> :<p><button onClick={completeHandler}>Complete</button> <button onClick={navigateHome}>Cancel</button></p>
+                }</>:null}
             </p>
             
         </div>
