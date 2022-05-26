@@ -3,7 +3,7 @@ import React from 'react';
 const Login = (props) => {
     const {onSubmitHandler,employee,errors,onChangeHandler,buttonText} = props;
     return (
-        <div>
+        <div className="sign-un-container">
             <form onSubmit={onSubmitHandler}>
             <div>
             <label>
@@ -25,8 +25,8 @@ const Login = (props) => {
                 </label>
                 <input type="text" name="password" value={employee.password} onChange={(e)=>onChangeHandler(e)}></input>
             </div>
-            <div>
-                <button type="submit">{buttonText}</button>
+            <div className="btn2">
+                <button type="submit" class="btn1 btn-primary">{buttonText}</button>
             </div>
         </form>
         </div>
