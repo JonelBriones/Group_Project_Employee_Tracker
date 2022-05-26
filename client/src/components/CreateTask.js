@@ -12,7 +12,8 @@ const CreateTask = () => {
         confirmPassword: "",
         clockedIn: ""
     })
-   
+   const addTask = "Create a Task"
+   const add = "Add"
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [dueDate, setDueDate] = useState("")
@@ -67,7 +68,7 @@ const CreateTask = () => {
 return(
     <div>
         <Navbar/>
-        <h1> Add Task</h1>
+        <h1>{addTask}</h1>
         <form onSubmit={onSubmitHandler}>
             <div>
                 {errors.name ? <p>{errors.name.message}</p> : null}
@@ -84,7 +85,7 @@ return(
                 <label>Due Date:</label>
                 <input type='date' onChange={(e)=> setDueDate(e.target.value)} value={dueDate}></input>
             </div>
-            <input type='submit' />
+            <button type='submit'>{add}</button>
         </form>
     </div>
 )

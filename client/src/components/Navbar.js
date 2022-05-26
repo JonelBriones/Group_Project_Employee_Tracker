@@ -7,7 +7,7 @@ const Navbar = () => {
     useEffect(() => {
         axios.get("http://localhost:8000/api/employees/employee",{withCredentials:true})
             .then((res)=>{
-                console.log(res.data)
+                // console.log(res.data)
                 setEmployee(res.data)
             })
             .catch((err)=>{
