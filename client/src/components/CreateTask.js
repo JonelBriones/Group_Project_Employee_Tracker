@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from './Navbar';
+import './AddTask.css';
 
 const CreateTask = () => {
     const [employee, setEmployee] = useState({
@@ -12,8 +13,8 @@ const CreateTask = () => {
         confirmPassword: "",
         clockedIn: ""
     })
-   const addTask = "Create a Task"
-   const add = "Add"
+    const addTask = "Create a Task"
+    const add = "Add"
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [dueDate, setDueDate] = useState("")
@@ -66,27 +67,29 @@ const CreateTask = () => {
         return today
     }
 return(
-    <div>
+    <div className="task-box">
         <Navbar/>
         <h1>{addTask}</h1>
-        <form onSubmit={onSubmitHandler}>
-            <div>
-                {errors.name ? <p>{errors.name.message}</p> : null}
-                <label>Task:</label>
-                <input type='text' onChange={(e)=> setName(e.target.value)} value={name}/>
-            </div>
-            <div>
-            {errors.description ? <p>{errors.description.message}</p> : null}
-                <label>Description:</label>
-                <input input type='text' onChange={(e)=> setDescription(e.target.value)} value={description}/>
-            </div>
-            <div>
-                {errors.dueDate ? <p>{errors.dueDate.message}</p> : null}
-                <label>Due Date:</label>
-                <input type='date' onChange={(e)=> setDueDate(e.target.value)} value={dueDate}></input>
-            </div>
-            <button type='submit'>{add}</button>
-        </form>
+        <div className="task-container">
+            <form onSubmit={onSubmitHandler}>
+                <div className ="task">
+                    {errors.name ? <p>{errors.name.message}</p> : null}
+                    <label>Task:</label>
+                    <input type='text' onChange={(e)=> setName(e.target.value)} value={name} className="box1"/>
+                </div>
+                <div className ="task">
+                {errors.description ? <p>{errors.description.message}</p> : null}
+                    <label>Description:</label>
+                    <input input type='text' onChange={(e)=> setDescription(e.target.value)} value={description} className="box2"/>
+                </div>
+                <div className ="task">
+                    {errors.dueDate ? <p>{errors.dueDate.message}</p> : null}
+                    <label>Due Date:</label>
+                    <input type='date' onChange={(e)=> setDueDate(e.target.value)} value={dueDate} className="box3"></input>
+                </div>
+                <button type='submit' className="btn btn-primary">{add}</button>
+            </form>
+        </div>
     </div>
 )
 }
