@@ -80,6 +80,17 @@ const Home = (props) => {
     const formatDate = (date) =>{
         return date.slice(0,10)
     }
+    const deleteTask = (taskId) =>{
+        axios.delete(`http://localhost:8000/api/task/${taskId}`)
+            .then((res)=>{
+                console.log(res.data)
+                setUncompletedTasks(uncompletedTasks.filter((task, index) => task._id !== taskId))
+                navigate(`/home`)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        }
     return (
         <div>
             <Navbar/>
@@ -121,6 +132,7 @@ const Home = (props) => {
                         <th scope="col">Completed?</th>
                         <th scope="col">Date</th>
                         <th scope="col">Created By</th>
+                        <th scope='col'>Actions</th>
                         </tr>
                     </thead>
                 {
@@ -134,6 +146,12 @@ const Home = (props) => {
                                 <td>False</td>
                                 <td>{formatDate(oneTask.dueDate)}</td>
                                 <td onClick={()=>redirect(`/view/employee/${oneTask.createdBy._id}`)} className="table-link">{oneTask.createdBy.username}</td>
+                                <td>
+                                {oneTask.createdBy._id === employee._id ? 
+                                <p><button onClick={(e)=>{deleteTask(oneTask._id)}}> Delete</button></p>
+                                : <button onClick={()=>redirect(`/view/task/${oneTask._id}`)} className="table-link">View</button>}
+                                </td>
+                                
                             </tr>
                         }
                         </tbody>
