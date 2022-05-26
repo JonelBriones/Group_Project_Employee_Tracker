@@ -1,0 +1,95 @@
+.auth-container {
+	display: flex;
+	min-height: 860px;
+	width: 100%;
+	padding: 20px;
+}
+.auth-container input {
+	display: block;
+	
+}
+
+.sign-in-container {
+	width: 55%;
+	padding: 50px;
+	border-right: 1px solid gray;
+}
+
+.sign-in-content {
+	width: 50%;
+	margin: 0 auto;
+
+}
+.sign-in-content input {
+	width: 50%;
+	padding: 10px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	font-size: 15px;
+}
+.sign-in-content input[type='submit'] {
+	width: 20%;
+}
+.sign-up-container {
+	width: 50%;
+	/* padding-left: 20px; */
+	padding: 50px;
+}
+
+.sign-up-container1 {
+	width: 40%;
+	/* padding-left: 20px; */
+	padding: 40px;
+    margin: 0 auto;
+    background-color: red;
+}
+.sign-up-content {
+	width: 10%;
+	margin: 0 auto;
+}
+
+.sign-up-content input[type='submit'] {
+	width: 20%;
+}
+.sign-up-content input {
+	width: 90%;
+	padding: 10px;
+	border-radius: 5px;
+	margin-bottom: 10px;
+	font-size: 15px;
+}
+
+.btn1{
+	width: 150px;
+	background-color: #4fa167;
+	color: white;
+	padding: 5px;
+	margin-top: 10px;
+	border: 3px solid #000000;
+	box-shadow: 2px 4px 1px black;
+	cursor: pointer;
+	justify-items: center;
+	font-size: 18px;
+	height: 45px;
+}
+
+.signIn {
+    width: 60%;
+	margin: 0 auto;
+    background-color: red;
+    
+}
+
+.delete-btn{
+	width: 100px;
+	background-color: #d8cbcb;
+	color: rgb(118, 10, 10);
+	padding: 5px;
+
+	border: 1px solid #000000;
+	box-shadow: 1px 3px 1px black;
+	cursor: pointer;
+	font-size: 18px;
+	margin-left: 70px ;
+	height: 35px;
+}
