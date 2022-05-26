@@ -12,11 +12,11 @@ const ViewTask = (props) => {
         console.log(id)
         axios.get("http://localhost:8000/api/task/" + id)
             .then((res)=>{
-                console.log("task data",res.data)
+                // console.log("task data",res.data)
                 setTask(res.data)
                 axios.get("http://localhost:8000/api/employee/" + res.data.createdBy)
                     .then((res)=>{
-                        console.log("created by",res.data)
+                        // console.log("created by",res.data)
                         setEmployee(res.data)
                     })
                     .catch((err)=>{
@@ -29,7 +29,7 @@ const ViewTask = (props) => {
     useEffect(() => {
         axios.get("http://localhost:8000/api/employees/employee",{withCredentials:true})
             .then((res)=>{
-                console.log(res.data)
+                // console.log(res.data)
                 setLogged(res.data)
             })
             .catch((err)=>{
@@ -66,15 +66,14 @@ const ViewTask = (props) => {
         )
         .then((res)=>{
             // console.log(res)
-            navigate('/completed_task')
+            navigate('/home')
         })
         .catch((err)=>{
             console.log(err)
         })
     }
-    const navigateHome = (e) =>{
-        e.preventDefault();
-        navigate('/home')
+    const redirect = (url) => {
+        navigate(url)
     }
 
     return(
@@ -93,8 +92,13 @@ const ViewTask = (props) => {
                 {task.completed ? 
                 <>
                 <button onClick={uncompleteHandler}>Uncomplete</button>
-                <button onClick={navigateHome}>Cancel</button>
-                </> :<p><button onClick={completeHandler}>Complete</button> <button onClick={navigateHome}>Cancel</button></p>
+                <button onClick={()=>redirect(`/edit/task/${task._id}`)}>Edit</button>
+                <button onClick={()=>redirect('/home')}>Cancel</button>
+                </> :
+                <><button onClick={completeHandler}>Complete</button> 
+                <button onClick={()=>redirect(`/edit/task/${task._id}`)}>Edit</button>
+                <button onClick={()=>redirect('/home')}>Cancel</button>
+                </>
                 }</>:null}
             </p>
             
