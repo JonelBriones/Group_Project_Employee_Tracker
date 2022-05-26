@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Registration from '../components/Registration';
 import Login from '../components/Login';
+// import './Login.css';
 const LogReg = () => {
     const navigate = useNavigate();
     const [confirmReg,setConfirmReg] = useState('')
@@ -74,23 +75,32 @@ const LogReg = () => {
         setEmployeeLogin(employeeObject)
     }
     return (
-        <div>
-            <h1>Employee Tracker</h1>
-            <Registration
-            onSubmitHandler={onSubmitHandler}
-            onChangeHandler={onChangeHandler}
-            employee={employee}
-            errors={errors}
-            confirmReg={confirmReg}
-            buttonText={'Create Account'}
-            />
-            <Login
-                onSubmitHandler={onSubmitHandlerLogin}
-                onChangeHandler={onChangeHandlerLogin}
-                employee={employeeLogin}
-                errors={loginErrors}
-                buttonText={'Login'}
-            />
+        <div className="auth-container">
+            <div className="sign-in-container">
+                <h1>Employee Tracker</h1>
+                <div className="sign-up-container1">
+                    <Login
+                        onSubmitHandler={onSubmitHandlerLogin}
+                        onChangeHandler={onChangeHandlerLogin}
+                        employee={employeeLogin}
+                        errors={loginErrors}
+                        buttonText={'Login'}
+                    />
+                </div>
+            </div>
+            <div className="sign-up-container">
+                
+                <div className="sign-up-contain">
+                    <Registration
+                        onSubmitHandler={onSubmitHandler}
+                        onChangeHandler={onChangeHandler}
+                        employee={employee}
+                        errors={errors}
+                        confirmReg={confirmReg}
+                        buttonText={'Create Account'}
+                        /> 
+                </div>
+            </div>
         </div>
     )
 }
