@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
 
-const UpdateTaskV2= () => {
+const VersionTwoUpdateTask= () => {
     const [task, setTask] = useState({});
     const{id} = useParams ();
     const navigate = useNavigate();
@@ -54,56 +54,64 @@ const UpdateTaskV2= () => {
     return (
         <div>
             <Navbar/>
-            <h1> Add Task</h1>
-            <form onSubmit={SubmitHandler}>
-                <div>
-                <label>
-                    {
-                    errors.name?
-                    <span>{errors.name.message}</span>:
-                    <span>Name</span>
-                    }
-                </label>
-                    <input 
-                        type='text' 
-                        id='name'
-                        onChange={ handleChange}
-                        value={task.name}/>
-                </div>
-                <div>
-                <label>
-                    {
-                    errors.description?
-                    <span>{errors.description.message}</span>:
-                    <span>Description</span>
-                    }
-                </label>
-                    <input
-                        type='text'
-                        id='description'
-                        onChange={handleChange}
-                        value={task.description}
-                        />
-                </div>
-                <div>
-                <label>
-                    {
-                    errors.dueDate?
-                    <span>{errors.dueDate.message}</span>:
-                    <span>Due Date</span>
-                    }
-                </label>
-                    <input 
-                        type='date'
-                        id='dueDate'
-                        onChange={handleChange} 
-                        value={task.dueDate}>
-                    </input>
-                </div>
-                <input type='submit'/>
-            </form>
+            <h1> Edit Task</h1>
+            <div className="task-container">
+                <form onSubmit={SubmitHandler}>
+                    <div className ="task">
+                    <label>
+                        {
+                        errors.name?
+                        <span>{errors.name.message}</span>:
+                        <span>Task:</span>
+                        }
+                    </label>
+                        <input 
+                            type='text' 
+                            id='name'
+                            onChange={ handleChange}
+                            value={task.name}
+                            className="box1"
+                            />
+                    </div>
+                    <div className ="task">
+                        <label>
+                            {
+                            errors.description?
+                            <span>{errors.description.message}</span>:
+                            <span>Description</span>
+                            }
+                        </label>
+                            <input
+                                type='text'
+                                id='description'
+                                onChange={handleChange}
+                                value={task.description}
+                                className="box2"
+                                />
+                    </div>
+                    <div className ="task">
+                        <label>
+                            {
+                            errors.dueDate?
+                            <span>{errors.dueDate.message}</span>:
+                            <span>Due Date</span>
+                            }
+                        </label>
+                            <input 
+                                type='date'
+                                id='dueDate'
+                                onChange={handleChange} 
+                                value={task.dueDate}
+                                className="box3"
+                                >
+                                
+                            </input>
+                    </div>
+                    <button type='submit' className="btn btn-primary">Update</button>
+                </form>
+            </div>
         </div>
     )
 }
 
-export default UpdateTaskV2;
+export default VersionTwoUpdateTask;
